@@ -6,6 +6,9 @@ Di sini, saya menggunakan database yang terdiri dari empat tabel utama: tabel fi
 
 Saya juga telah mengimplementasikan desain yang konsisten dalam penggunaan template/skin untuk halaman penambahan dan pengeditan data. Hal ini membantu menciptakan konsistensi visual. Selain itu, tampilan tabel yang disajikan tidak terbatas pada format tradisional berbentuk tabel, melainkan telah disesuaikan menjadi tampilan kartu (card) yang lebih modern dan menarik. Dengan demikian, pengguna dapat dengan cepat melihat informasi yang relevan mengenai setiap film tanpa harus terpaku pada tampilan tabel konvensional.
 
+### Desain Database
+![desain_db](https://github.com/rerevana/TP3DPBO2024C2/assets/113984261/9b179178-c8b4-4d54-bdb7-7b044a8e176b)
+
 ### Dokumentasi
 #### halaman utama
 ![tp3 index](https://github.com/rerevana/TP3DPBO2024C2/assets/113984261/aa9e4ab2-374e-401b-9ddf-5a469dea14f9)
@@ -20,3 +23,5 @@ Saya juga telah mengimplementasikan desain yang konsisten dalam penggunaan templ
 #### halaman daftar genre
 ![tp3 daftar genre](https://github.com/rerevana/TP3DPBO2024C2/assets/113984261/ebea1fb6-44d5-44f3-b559-0b4ec9f20b7b)
 
+### Video Preview
+https://github.com/rerevana/TP3DPBO2024C2/assets/113984261/610fd2a8-094c-45b3-8b1a-8ec0fc486045
