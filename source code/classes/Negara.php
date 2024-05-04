@@ -16,7 +16,7 @@ class Negara extends DB
 
     function addNegara($data)
     {
-        $nama = $data['nama'];
+        $nama = $data['nama_negara'];
         $query = "INSERT INTO negara VALUES('', '$nama')";
         return $this->executeAffected($query);
     }

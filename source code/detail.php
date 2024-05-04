@@ -8,19 +8,34 @@ include('classes/Negara.php');
 include('classes/Sutradara.php');
 include('classes/Template.php');
 
-$pengurus = new Film($DB_HOST, $DB_USERNAME, $DB_PASSWORD, $DB_NAME);
-$pengurus->open();
+$film = new Film($DB_HOST, $DB_USERNAME, $DB_PASSWORD, $DB_NAME);
+$film->open();
+
+if (isset($_POST['submit'])) 
+{
+    if ($film->updateData($_GET['id'], $_POST, $_FILES) > 0) {
+        echo "<script>
+            alert('Data berhasil diubah!');
+            document.location.href = 'detail.php?id={$_GET['id']}';
+        </script>";
+    } else {
+        echo "<script>
+        alert('Data gagal diubah!');
+        document.location.href = 'detail.php?id={$_GET['id']}';
+        </script>";
+    }
+}
 
 $data = nulL;
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
     if ($id > 0) {
-        $pengurus->getFilmById($id);
-        $row = $pengurus->getResult();
+        $film->getFilmById($id);
+        $row = $film->getResult();
 
         $data .= '<div class="card-header text-center">
-        <h3 class="my-0">Detail ' . $row['judul_film'] . '</h3>
+        <h3 class="my-0">Detail Film ' . $row['judul_film'] . '</h3>
         </div>
         <div class="card-body text-end">
             <div class="row mb-5">
@@ -68,13 +83,20 @@ if (isset($_GET['id'])) {
                 </div>
             </div>
             <div class="card-footer text-end">
-                <a href="#"><button type="button" class="btn btn-success text-white">Ubah Data</button></a>
-                <a href="#"><button type="button" class="btn btn-danger">Hapus Data</button></a>
-            </div>';
+            <div class="row mb-2">
+            <a href="editFilm.php?id=' . $id . '"><button type="button" class="btn btn-success text-white">Ubah Data</button></a>
+            </div>
+            <div class="row mb-2">
+                <form method="post" action="index.php">
+                    <input type="hidden" name="id" value="' . $id . '">
+                    <button type="submit" name="hapus" class="btn btn-danger">Hapus Data</button>
+                </form>
+            </div>
+        </div>';
     }
 }
 
-$pengurus->close();
+$film->close();
 $detail = new Template('templates/skindetail.html');
 $detail->replace('DATA_DETAIL_FILM', $data);
 $detail->write();

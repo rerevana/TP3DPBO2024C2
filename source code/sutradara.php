@@ -42,7 +42,8 @@ $view = new Template('templates/skintabel.html');
 $mainTitle = 'Sutradara';
 $header = '<tr>
 <th scope="row">No.</th>
-<th scope="row">Nama Divisi</th>
+<th scope="row">Nama Sutradara</th>
+<th scope="row">Jenis Kelamin</th>
 <th scope="row">Aksi</th>
 </tr>';
 
@@ -56,8 +57,10 @@ while ($sut = $sutradara->getResult()) {
     $data .= '<tr>
     <th scope="row">' . $no . '</th>
     <td>' . $sut['nama_sutradara'] . '</td>
+    <td>' . $sut['jenis_kelamin_sutradara'] . '</td>
     <td style="font-size: 22px;">
-        <a href="sutradara.php?id=' . $sut['id_sutradara'] . '" title="Edit Data"><i class="bi bi-pencil-square text-warning"></i></a>&nbsp;<a href="sutradara.php?hapus=' . $sut['id_sutradara'] . '" title="Delete Data"><i class="bi bi-trash-fill text-danger"></i></a>
+        <a href="editSutradara.php?id=' . $sut['id_sutradara'] . '" title="Edit Data"><i class="bi bi-pencil-square text-warning"></i></a>&nbsp;
+        <a href="sutradara.php?hapus=' . $sut['id_sutradara'] . '" title="Delete Data"><i class="bi bi-trash-fill text-danger"></i></a>
         </td>
     </tr>';
     $no++;
@@ -90,6 +93,7 @@ if (isset($_GET['id'])) {
         $row = $sutradara->getResult();
 
         $dataUpdate = $row['nama_sutradara']; // Data divisi yang akan diubah
+        $dataUpdate = $row['jenis_kelamin_sutradara'];
         $btn = 'Simpan'; // Text tombol simpan
         $title = 'Ubah'; // Judul halaman
 
@@ -128,5 +132,6 @@ $view->replace('DATA_TITLE', $title);
 $view->replace('DATA_BUTTON', $btn);
 $view->replace('DATA_FORM_LABEL', $formLabel);
 $view->replace('DATA_TABEL', $data);
+$view->replace('DATA_LINK_CREATE', 'tambahSutradara.php');
 $view->write(); // Tampilkan tampilan
 ?>

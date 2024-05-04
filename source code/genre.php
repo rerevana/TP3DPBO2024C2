@@ -57,7 +57,8 @@ while ($gen = $genre->getResult()) {
     <th scope="row">' . $no . '</th>
     <td>' . $gen['nama_genre'] . '</td>
     <td style="font-size: 22px;">
-        <a href="genre.php?id=' . $gen['id_genre'] . '" title="Edit Data"><i class="bi bi-pencil-square text-warning"></i></a>&nbsp;<a href="genre.php?hapus=' . $gen['id_genre'] . '" title="Delete Data"><i class="bi bi-trash-fill text-danger"></i></a>
+        <a href="editGenre.php?id=' . $gen['id_genre'] . '" title="Edit Data"><i class="bi bi-pencil-square text-warning"></i></a>&nbsp;
+        <a href="genre.php?hapus=' . $gen['id_genre'] . '" title="Delete Data"><i class="bi bi-trash-fill text-danger"></i></a>
         </td>
     </tr>';
     $no++;
@@ -128,5 +129,6 @@ $view->replace('DATA_TITLE', $title);
 $view->replace('DATA_BUTTON', $btn);
 $view->replace('DATA_FORM_LABEL', $formLabel);
 $view->replace('DATA_TABEL', $data);
+$view->replace('DATA_LINK_CREATE', 'tambahGenre.php');
 $view->write(); // Tampilkan tampilan
 ?>

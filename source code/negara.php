@@ -57,7 +57,8 @@ while ($neg = $negara->getResult()) {
     <th scope="row">' . $no . '</th>
     <td>' . $neg['nama_negara'] . '</td>
     <td style="font-size: 22px;">
-        <a href="negara.php?id=' . $neg['id_negara'] . '" title="Edit Data"><i class="bi bi-pencil-square text-warning"></i></a>&nbsp;<a href="negara.php?hapus=' . $neg['id_negara'] . '" title="Delete Data"><i class="bi bi-trash-fill text-danger"></i></a>
+        <a href="editNegara.php?id=' . $neg['id_negara'] . '" title="Edit Data"><i class="bi bi-pencil-square text-warning"></i></a>&nbsp;
+        <a href="negara.php?hapus=' . $neg['id_negara'] . '" title="Delete Data"><i class="bi bi-trash-fill text-danger"></i></a>
         </td>
     </tr>';
     $no++;
@@ -128,5 +129,6 @@ $view->replace('DATA_TITLE', $title);
 $view->replace('DATA_BUTTON', $btn);
 $view->replace('DATA_FORM_LABEL', $formLabel);
 $view->replace('DATA_TABEL', $data);
+$view->replace('DATA_LINK_CREATE', 'tambahNegara.php');
 $view->write(); // Tampilkan tampilan
 ?>

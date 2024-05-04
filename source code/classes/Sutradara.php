@@ -16,8 +16,8 @@ class Sutradara extends DB
 
     function addSutradara($data)
     {
-        $nama = $data['nama'];
-        $jenis_kelamin = $data['jenis_kelamin'];
+        $nama = $data['nama_sutradara'];
+        $jenis_kelamin = $data['jenis_kelamin_sutradara'];
         $query = "INSERT INTO sutradara VALUES('', '$nama', '$jenis_kelamin')";
         return $this->executeAffected($query);
     }
@@ -26,7 +26,7 @@ class Sutradara extends DB
     {
         $nama = $data['nama'];
         $jenis_kelamin = $data['jenis_kelamin'];
-        $query = "UPDATE sutradara SET nama_sutradara='$nama' SET jenis_kelamin_sutradara='$jenis_kelamin' WHERE id_sutradara=$id";
+        $query = "UPDATE sutradara SET nama_sutradara='$nama', jenis_kelamin_sutradara='$jenis_kelamin' WHERE id_sutradara=$id";
         return $this->executeAffected($query);
     }
 
