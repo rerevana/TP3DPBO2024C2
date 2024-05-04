@@ -2,18 +2,8 @@
 
 class Film extends DB
 {
-    // function getFilmJoin()
-    // {
 
-    //     $query = "SELECT * FROM film 
-    //     JOIN sutradara ON film.id_sutradara=sutradara.id_sutradara 
-    //     JOIN genre ON film.id_genre=genre.id_genre 
-    //     JOIN negara ON film.id_negara=negara.id_negara ORDER BY film.id_film";
-
-    //     return $this->execute($query);
-    // }
-
-    function getFilmJoin($sortBy = 'id_film', $sortOrder = 'ASC')
+    function getFilmJoin($sortBy = 'judul_film', $sortOrder = 'ASC')
     {
         $query = "SELECT * FROM film 
         JOIN sutradara ON film.id_sutradara=sutradara.id_sutradara 
@@ -40,18 +30,18 @@ class Film extends DB
     }
 
     function searchFilm($keyword)
-    {
-        // Query untuk pencarian film berdasarkan judul film
-        $query = "SELECT * FROM film 
-                  JOIN genre ON film.id_genre = genre.id_genre 
-                  JOIN sutradara ON film.id_sutradara = sutradara.id_sutradara 
-                  JOIN negara ON film.id_negara = negara.id_negara
-                  WHERE judul_film LIKE '%$keyword%'";
+{
+    // Query untuk pencarian film berdasarkan judul film
+    $query = "SELECT * FROM film 
+              JOIN genre ON film.id_genre = genre.id_genre 
+              JOIN sutradara ON film.id_sutradara = sutradara.id_sutradara 
+              JOIN negara ON film.id_negara = negara.id_negara
+              WHERE judul_film LIKE '%$keyword%'";
 
-        // Eksekusi query dan tangkap hasilnya
-        $result = $this->execute($query);
+    // Eksekusi query dan tangkap hasilnya
+    return $this->execute($query);
+}
 
-    }
 
     function addData($data, $file)
     {
@@ -69,13 +59,12 @@ class Film extends DB
             $angka_acak     = rand(1,999);
             $nama_gambar_baru = $angka_acak.'-'.$foto_film; //menggabungkan angka acak dengan nama file sebenarnya
                     
-                move_uploaded_file($file_tmp, 'assets/images/'.$nama_gambar_baru); //memindah file gambar ke folder gambar
-                // jalankan query INSERT untuk menambah data ke database pastikan sesuai urutan (id tidak perlu karena dibikin otomatis)
-                $query = "INSERT INTO film VALUES ('', '$nama_gambar_baru', '$judul', '$id_genre', '$durasi_film', '$id_sutradara', '$id_negara', '$rating_usia_film')";
+            move_uploaded_file($file_tmp, 'assets/images/'.$nama_gambar_baru); //memindah file gambar ke folder gambar
+            // jalankan query INSERT untuk menambah data ke database pastikan sesuai urutan (id tidak perlu karena dibikin otomatis)
+            $query = "INSERT INTO film VALUES ('', '$nama_gambar_baru', '$judul', '$id_genre', '$durasi_film', '$id_sutradara', '$id_negara', '$rating_usia_film')";
 
-          } 
+        } 
             
-        // $query = "INSERT INTO film VALUES ('', '$foto_film', '$judul', '$id_genre', '$durasi_film', '$id_sutradara', '$id_negara', '$rating_usia_film')";
         
         return $this->executeAffected($query);
     }
@@ -109,17 +98,22 @@ class Film extends DB
             WHERE id_film = $id"; 
         }
 
-            
-        // $query = "UPDATE film 
-        // SET judul_film = '$judul', foto_film = '$foto_film', id_genre = '$id_genre', durasi_film = '$durasi_film', id_sutradara = '$id_sutradara', id_negara = '$id_negara', rating_usia_film = '$rating_usia_film' 
-        // WHERE id_film = $id"; 
-
         return $this->executeAffected($query);
     }
 
     function deleteData($id)
     {
         // // Query untuk menghapus data pengurus berdasarkan ID
+        $query = "SELECT * FROM film WHERE id_film = $id";
+
+        $this->execute($query);
+        $result = $this->getResult();
+        $nama_gambar_lama = $result['foto_film'];
+
+        if (file_exists('assets/images/'.$nama_gambar_lama)) 
+        {
+            unlink('assets/images/'.$nama_gambar_lama);
+        }
         $query = "DELETE FROM film WHERE id_film = $id";
         
         // Eksekusi query dan kembalikan status keberhasilan

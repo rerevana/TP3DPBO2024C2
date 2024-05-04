@@ -1,3 +1,7 @@
+<!-- Saya Revana Faliha Salma NIM 2202869 mengerjakan Soal TP3
+dalam mata kuliah DPBO untuk keberkahanNya maka saya tidak melakukan 
+kecurangan seperti yang telah dispesifikasikan. Aamiin. -->
+
 <?php
 
 include('config/db.php');
@@ -14,19 +18,30 @@ $listFilm = new Film($DB_HOST, $DB_USERNAME, $DB_PASSWORD, $DB_NAME);
 // buka koneksi
 $listFilm->open();
 
-// cari film
+$cari = false;
 if (isset($_POST['btn-cari'])) {
-    $listFilm->searchFilm($_POST['cari']);
-} 
-else {
-    $sortBy = isset($_POST['sort-by']) ? $_POST['sort-by'] : 'id_film';
-    $sortOrder = isset($_POST['sort-order']) ? $_POST['sort-order'] : 'asc';
-
-    $listFilm->getFilmJoin($sortBy, $sortOrder);
-
+    $keyword = $_POST['cari'];
+    $listFilm->searchFilm($keyword);
+    if ($listFilm->getAffected() < 1) {
+        $cari = false;
+        echo "<script>
+        alert('Data film tidak ditemukan!');
+            document.location.href = 'index.php';
+        </script>";
+    } 
+    else{
+        $cari = true;
+    }
 }
 
-$data = null; 
+if (isset($_GET['sort_submit'])) {
+    $sortBy = $_GET['sort_by'];
+    $sortOrder = $_GET['sort_order'];
+    $listFilm->getFilmJoin($sortBy, $sortOrder);
+} else if ($cari === false) {
+    
+    $listFilm->getFilmJoin(); // Jika tidak ada pengurutan, ambil data tanpa pengurutan
+}
 
 if (isset($_POST['hapus'])) 
 {
@@ -58,32 +73,11 @@ if (isset($_POST['submit']))
     }
 }
 
-// if (isset($_POST['btn-cari'])) {
-//     // Cek apakah ada query pencarian yang dikirimkan
-//     if (!empty($_POST['cari'])) {
-//         // Lakukan pencarian menggunakan metode searchFilm()
-//         $listFilm->searchFilm($_POST['cari']);
-//     } else {
-//         // Tampilkan pesan jika input pencarian kosong
-//         echo "<script>alert('Masukkan kata kunci pencarian!');</script>";
-//     }
-// } else {
-//     // Jika tidak ada pencarian, tampilkan semua film
-//     $listFilm->getFilmJoin();
-// }
-
-// // Buat variabel untuk menyimpan hasil pencarian atau semua film
-// $data = '';
-
-// // Loop untuk mengambil data film yang sesuai dengan hasil pencarian
-// while ($row = $listFilm->getResult()) {
-//     // Konstruksi tampilan film seperti sebelumnya
-// }
+$data = null; 
 
 // ambil data pengurus
 // gabungkan dgn tag html
 // untuk di passing ke skin/template
-$listFilm->getFilmJoin();
 while ($row = $listFilm->getResult()) {
     $data .= '<div class="col gx-2 gy-3 justify-content-center">' .
         '<div class="card pt-4 px-2 film-thumbnail">

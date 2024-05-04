@@ -34,8 +34,12 @@ class DB
 
     function executeAffected($query = "")
     {
-        // mengeksekusi query
         mysqli_query($this->conn, $query);
+        return mysqli_affected_rows($this->conn);
+    }
+
+    function getAffected()
+    {
         return mysqli_affected_rows($this->conn);
     }
 
