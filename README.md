@@ -1,6 +1,6 @@
 ### TP3DPBO2024C2
 
-#### Saya Revana Faliha Salma NIM 2202869 mengerjakan Soal TP3dalam mata kuliah DPBO untuk keberkahanNya maka saya tidak melakukan kecurangan seperti yang telah dispesifikasikan. Aamiin.
+#### Saya Revana Faliha Salma NIM 2202869 mengerjakan Soal TP3 dalam mata kuliah DPBO untuk keberkahanNya maka saya tidak melakukan kecurangan seperti yang telah dispesifikasikan. Aamiin.
 
 Di sini, saya menggunakan database yang terdiri dari empat tabel utama: tabel film, sutradara, negara, dan genre. Tabel film memiliki relasi dengan tabel sutradara, negara, dan genre untuk menyajikan informasi yang terintegrasi. Fitur yang tersedia meliputi operasi CRUD (Create, Read, Update, Delete). Selain itu juga, ada fitur pencarian film yang memungkinkan pengguna untuk menemukan film yang mereka cari. Terakhir, ada fitur pengurutan film untuk mengurutkan film berdasarkan judul film secara ascending (asc) maupun descending (desc).
 
